@@ -1,0 +1,16 @@
+# docker-compose.yml
+web:
+  build: .
+  #env_file: .envrc # Doesn't work with .envrc example because of exports
+  environment:
+    DATABASE_URL: ecto://postgres:postgres@db/hello_phoenix_prod
+    PORT: 4444
+  links:
+    - db
+  ports:
+    - 4444:4444
+db:
+  image: postgres:9.5
+  environment:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
